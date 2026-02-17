@@ -14,7 +14,8 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././PWM1/PWM1.h .././UART/UART.h
+ .././I2C_LIB/I2C_LIB.h .././COLOR_TCS34725/TCS34725_LIB.h \
+ .././COLOR_TCS34725/../I2C_LIB/I2C_LIB.h .././SPI_LIB/SPI_LIB.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -46,6 +47,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
-.././PWM1/PWM1.h:
+.././I2C_LIB/I2C_LIB.h:
 
-.././UART/UART.h:
+.././COLOR_TCS34725/TCS34725_LIB.h:
+
+.././COLOR_TCS34725/../I2C_LIB/I2C_LIB.h:
+
+.././SPI_LIB/SPI_LIB.h:

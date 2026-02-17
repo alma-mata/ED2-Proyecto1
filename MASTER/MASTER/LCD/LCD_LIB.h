@@ -1,0 +1,52 @@
+/*
+ * LCD_LIB.h
+ *
+ * Created: 1/26/2026 9:46:23 AM
+ *  Author: itzle
+ */ 
+
+
+#ifndef LCD_LIB_H_
+#define LCD_LIB_H_
+
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <stdlib.h>
+#include <util/delay.h>
+
+//SALIDAS PINES DE CONTROL ENABLE, W/R, RS
+#define LCD_CONTROL	PORTC
+#define CONTROL_DDR DDRC
+#define PIN_RS		PINC3
+#define PIN_WR		PINC2
+#define PIN_ENABLE	PINC1
+
+//SALIDAS D7 - D2
+#define LCD_PORTD PORTD
+#define LCD_DDRD  DDRD
+#define	PORTD_MASK 0xFC //PD0 Y PD1 SON PARA UART Y CON ESO NO LOS TOCAMOS (1111 1100)
+
+//SALIDAS D0(PB0) - D1(PB1)
+#define	LCD_PORTB PORTB
+#define	LCD_DDRB  DDRB
+#define	PORTB_MASK 0x03 //NO TOCAR LOS PINES PB2 - PB4 (0000 0011)
+
+//HABILITAR Y DESHABILITAR RS, WR, ENABLE
+#define	ENABLE_1()	LCD_CONTROL |= (1<<PIN_ENABLE)
+#define	ENABLE_0()	LCD_CONTROL &= ~(1<<PIN_ENABLE)
+#define	RS_0()		LCD_CONTROL &= ~(1<<PIN_RS)
+#define	RS_1()		LCD_CONTROL |= (1<<PIN_RS)
+#define	WR_WRITE()	LCD_CONTROL &= ~(1<<PIN_WR)
+#define	WR_READ()	LCD_CONTROL |= (1<<PIN_WR)
+
+//FUNCIONES A UTILIZAR
+void INICIAR_LCD(void); //INICIAR EL LCD
+void COMANDO_LCD(uint8_t COMANDO); //MNDA UN COMANDO
+void LCD_WRITE_CHAR(char DATO); //MANDA UNA LETRA
+void LCD_PORT(char DATO); //MANDA EL DATO A LOS PUERTOS D Y B
+void LCD_LECTURA(void); //
+void LCD_WRITE_STRING(char *TEXTO ); //MANDA UN TEXTO
+void CURSOR(uint8_t FILA, uint8_t COLUMNA); //MUEVE EL CURSOR 
+
+
+#endif /* LCD_LIB_H_ */
