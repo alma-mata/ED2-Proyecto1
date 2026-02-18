@@ -35,8 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../COLOR_TCS34725 \
 ../I2C_LIB \
+../PWM2 \
 ../SPI_LIB \
-../UART \
 ../PWM1
 
 
@@ -46,8 +46,8 @@ C_SRCS +=  \
 ../I2C_LIB/I2C_LIB.c \
 ../main.c \
 ../PWM1/PWM1.c \
-../SPI_LIB/SPI_LIB.c \
-../UART/UART.c
+../PWM2/PWM2.c \
+../SPI_LIB/SPI_LIB.c
 
 
 PREPROCESSING_SRCS += 
@@ -61,32 +61,32 @@ COLOR_TCS34725/TCS34725_LIB.o \
 I2C_LIB/I2C_LIB.o \
 main.o \
 PWM1/PWM1.o \
-SPI_LIB/SPI_LIB.o \
-UART/UART.o
+PWM2/PWM2.o \
+SPI_LIB/SPI_LIB.o
 
 OBJS_AS_ARGS +=  \
 COLOR_TCS34725/TCS34725_LIB.o \
 I2C_LIB/I2C_LIB.o \
 main.o \
 PWM1/PWM1.o \
-SPI_LIB/SPI_LIB.o \
-UART/UART.o
+PWM2/PWM2.o \
+SPI_LIB/SPI_LIB.o
 
 C_DEPS +=  \
 COLOR_TCS34725/TCS34725_LIB.d \
 I2C_LIB/I2C_LIB.d \
 main.d \
 PWM1/PWM1.d \
-SPI_LIB/SPI_LIB.d \
-UART/UART.d
+PWM2/PWM2.d \
+SPI_LIB/SPI_LIB.d
 
 C_DEPS_AS_ARGS +=  \
 COLOR_TCS34725/TCS34725_LIB.d \
 I2C_LIB/I2C_LIB.d \
 main.d \
 PWM1/PWM1.d \
-SPI_LIB/SPI_LIB.d \
-UART/UART.d
+PWM2/PWM2.d \
+SPI_LIB/SPI_LIB.d
 
 OUTPUT_FILE_PATH +=Slave1.elf
 
@@ -130,14 +130,14 @@ PWM1/PWM1.o: ../PWM1/PWM1.c
 	@echo Finished building: $<
 	
 
-SPI_LIB/SPI_LIB.o: ../SPI_LIB/SPI_LIB.c
+PWM2/PWM2.o: ../PWM2/PWM2.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-UART/UART.o: ../UART/UART.c
+SPI_LIB/SPI_LIB.o: ../SPI_LIB/SPI_LIB.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

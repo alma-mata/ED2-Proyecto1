@@ -10,7 +10,7 @@ main.c
 
 PWM1\PWM1.c
 
-SPI_LIB\SPI_LIB.c
+PWM2\PWM2.c
 
-UART\UART.c
+SPI_LIB\SPI_LIB.c
 

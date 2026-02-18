@@ -15,7 +15,8 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  .././I2C_LIB/I2C_LIB.h .././COLOR_TCS34725/TCS34725_LIB.h \
- .././COLOR_TCS34725/../I2C_LIB/I2C_LIB.h .././SPI_LIB/SPI_LIB.h
+ .././COLOR_TCS34725/../I2C_LIB/I2C_LIB.h .././SPI_LIB/SPI_LIB.h \
+ .././PWM1/PWM1.h .././PWM2/PWM2.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -54,3 +55,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././COLOR_TCS34725/../I2C_LIB/I2C_LIB.h:
 
 .././SPI_LIB/SPI_LIB.h:
+
+.././PWM1/PWM1.h:
+
+.././PWM2/PWM2.h:
