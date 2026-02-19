@@ -31,10 +31,10 @@ uint8_t dato_peso = 0;
 uint8_t dato_distancia = 0;
 uint8_t dato_color = 0;
 
-uint8_t feed_activo = 0;
-uint8_t feed_peso = 0;
-uint8_t feed_distancia = 0;
-uint8_t feed_color = 0;
+uint8_t feed_activo = -1;
+uint8_t feed_peso = -1;
+uint8_t feed_distancia = -1;
+uint8_t feed_color = -1;
 
 volatile bool nuevo_dato = false;
 volatile uint8_t lastByte = 0;
@@ -58,7 +58,6 @@ AdafruitIO_Feed *dcFeed = io.feed("motor_dc");
 /************************ Funciones *******************************/
 void onReceive(int numBytes) {
   if (numBytes == sizeof(datosI2C)) {
-
     uint8_t *ptr = (uint8_t*)&sensores;
 
     for (int i = 0; i < sizeof(datosI2C); i++) {
@@ -176,10 +175,10 @@ void loop() {
 
   // if (nuevo_dato){
   //   nuevo_dato = false;
-  //   Serial.printf("Recibido: 0x%02X\n", sensores.activo);
-  //   Serial.printf("Recibido: 0x%02X\n", sensores.color);
-  //   Serial.printf("Recibido: 0x%02X\n", sensores.distancia);
-  //   Serial.printf("Recibido: 0x%02X\n", sensores.peso);
+  //   Serial.printf("Recibido a: 0x%02X\n", sensores.activo);
+  //   Serial.printf("Recibido b: 0x%02X\n", sensores.color);
+  //   Serial.printf("Recibido c: 0x%02X\n", sensores.distancia);
+  //   Serial.printf("Recibido d: 0x%02X\n", sensores.peso);
   // }
 }
 
