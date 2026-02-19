@@ -7,7 +7,7 @@
  * Descripcion: Esclavo encargado de mover el motor servo y stepper, además del sensor de color
  * Creado: 09/02/2026
 */
-/****************************************/
+
 #define F_CPU 16000000L
 #include <avr/io.h>
 #include <util/delay.h>
@@ -23,26 +23,20 @@
 #define PIN_DEBUG PIND5
 #define DIR_STEPPER PIND7
 
-
 volatile uint16_t contador_pasos = 0;
 volatile char COLOR_DETECTADO = '0';
-uint8_t ya_girado = 0;
 char ultimo_color = '0';
 
 DatosColor c;
 
 void setup(){
-
 	DDRD |= (1 << PIN_ROJO) | (1 << PIN_AZUL) | (1 << PIN_DEBUG) | (1 << DIR_STEPPER);
 	PORTD &= ~((1 << PIN_ROJO) | (1 << PIN_AZUL) | (1 << PIN_DEBUG));
-	
 	
 	DDRB |= (1 << PORTB0);
 	
 	SPI_INIT(SPI_SLAVE, DATA_MSB, CLOCK_LOW, FIRST_EDGE);
 	SPCR |= (1 << SPIE);
-	
-	update_DutyCycle1(1000);
 	
 	I2C_Master_Init(100000, 1);
 	Iniciar_Sensor(TIEMPO_50MS, GANANCIA_4X);
@@ -50,7 +44,7 @@ void setup(){
 	PWM1_Init();
 	PWM2_Init();
 	
-	
+	update_DutyCycle1(1000);
 	TIMSK2 &= ~(1 << OCIE2A);
 	
 	sei();
@@ -63,57 +57,59 @@ int main(void) {
 
 		PORTD ^= (1 << PIN_DEBUG);
 		
+		
 		if (c.c > 30) {
 			
+			// 1. ES AZUL
 			if ( ((uint32_t)c.b * 3 > (c.r + c.g) * 1.2) && (c.b > 50) ) {
 				COLOR_DETECTADO = '1';
 				PORTD |= (1 << PIN_AZUL);
 				PORTD &= ~(1 << PIN_ROJO);
 				
-				if (ya_girado == 0) {
-					update_DutyCycle1(1500);
-					
-					
-					if (ultimo_color != '1') {
-						PORTD |= (1 << DIR_STEPPER);
-						contador_pasos = 200;
-						TIMSK2 |= (1 << OCIE2A);
-						ultimo_color = '1';
-					}
-					ya_girado = 1;
+				
+				if (ultimo_color != '1') {
+					PORTD |= (1 << DIR_STEPPER);
+					contador_pasos = 200;
+					TIMSK2 |= (1 << OCIE2A);
+					ultimo_color = '1';
+					_delay_ms(200);
 				}
+				update_DutyCycle1(1500);
 			}
 			
+			// 2. ES ROJO
 			else if ( (c.r > c.g * 3.5) && (c.r > c.b * 1.8) ) {
 				COLOR_DETECTADO = '2';
 				PORTD |= (1 << PIN_ROJO);
 				PORTD &= ~(1 << PIN_AZUL);
 				
-				if (ya_girado == 0) {
-					update_DutyCycle1(1500);
-					
-					
-					if (ultimo_color != '2') {
-						PORTD &= ~(1 << DIR_STEPPER);
-						contador_pasos = 200;
-						TIMSK2 |= (1 << OCIE2A);
-						ultimo_color = '2';
-					}
-					ya_girado = 1;
+				
+				if (ultimo_color != '2') {
+					PORTD &= ~(1 << DIR_STEPPER);
+					contador_pasos = 200;
+					TIMSK2 |= (1 << OCIE2A);
+					ultimo_color = '2';
+					_delay_ms(200);
 				}
+				update_DutyCycle1(1500);
 			}
+			
 			
 			else {
 				COLOR_DETECTADO = '0';
 				PORTD &= ~((1 << PIN_ROJO) | (1 << PIN_AZUL));
+				
+				ultimo_color = '3';
+				update_DutyCycle1(1000);
 			}
 		}
+
+
 		else {
-			
 			COLOR_DETECTADO = '0';
-			ya_girado = 0;
 			PORTD &= ~((1 << PIN_ROJO) | (1 << PIN_AZUL));
-			update_DutyCycle1(1000);
+			
+			
 		}
 		
 		_delay_ms(50);
